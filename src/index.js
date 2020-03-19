@@ -12,7 +12,6 @@ const IMG_POS_Y= 0;
 let canvas= document.getElementById("slika");
 let ctx= canvas.getContext("2d");
 
-let activeShape= null;
 let hotSpotObjects= [];
 let newShape={
     startX: null,
@@ -28,11 +27,10 @@ let dragObj= null;
 
 let showDragObj= false;
 
-let collision= false;
+let collisionAllowed= false;
 
 document.getElementById("rect").addEventListener("click", function(){ 
         console.log("Rect clicked");
-        activeShape= "rect";
         document.getElementById("shapList").style.visibility= "hidden";
         document.getElementById("shapeBtn").innerText= "Rect";
         dragObj= dragRect;
@@ -40,7 +38,6 @@ document.getElementById("rect").addEventListener("click", function(){
 
 document.getElementById("circle").addEventListener("click", function(){ 
         console.log("Circle clicked");
-        activeShape= "circle";
         document.getElementById("shapList").style.visibility= "hidden";
         document.getElementById("shapeBtn").innerText= "Circle";
         dragObj= dragCircle;
@@ -89,6 +86,7 @@ function dragStart(event){
     showDragObj= true;
     if(dragObj)
         dragObj.updateCord(newShape);
+    
 }
 
 function drag(event){
@@ -97,44 +95,14 @@ function drag(event){
     newShape.endY= coordinates.y;
     if(dragObj)
         dragObj.updateCord(newShape);
-    if(dragObj == dragRect) //IZMENI kad dodas koliziju za krug //SVE PREBACI U CHECK COLLISION KLASU
-        if(!collision){            
-            for(let i= 0; i < hotSpotObjects.length; i++){
-                if(hotSpotObjects[i] instanceof Circle) 
-                    if(CollisionCheck.doesCircleRectCol(hotSpotObjects[i],dragObj)){
-                        dragObj.setColor("red");
-                        break;
-                    }else{
-                        dragObj.setColor("white");
-                        continue;
-                    }
-                
-                if(CollisionCheck.doesRectRectCol(hotSpotObjects[i],dragRect)){
-                    dragRect.setColor("red");
-                    break;
-                }
-                else
-                    dragRect.setColor("white");
-            }
-        }
-    if(dragObj == dragCircle)
-        if(!collision){
-            for(let i= 0; i < hotSpotObjects.length; i++){
-                if(hotSpotObjects[i] instanceof Circle) 
-                    if(CollisionCheck.doesCircleCircleCol(dragObj,hotSpotObjects[i])){
-                        dragObj.setColor("red");
-                        break;
-                    }else{
-                        dragObj.setColor("white");
-                        continue;
-                    }
-                
-                if(CollisionCheck.doesCircleRectCol(dragCircle,hotSpotObjects[i])){
-                    dragCircle.setColor("red");
-                    break;
-                }else{
-                    dragCircle.setColor("white");
-                }
+
+    if(!collisionAllowed){
+        if(CollisionCheck.doesObjsCollide(dragObj,hotSpotObjects)){
+            if(dragObj)
+                dragObj.setColor("red");
+        }else{
+            if(dragObj)
+                dragObj.setColor("white");
         }
     }
 }
@@ -143,11 +111,11 @@ function dragStop(event){
     let coordinates= getCanvasCoordinates(event);
     showDragObj= false;
 
-    if(activeShape == "rect"){
-        if(dragRect.getColor() != "red" || collision)
+    if(dragObj instanceof Rect){
+        if(dragRect.getColor() != "red" || collisionAllowed)
             hotSpotObjects.push(new Rect(newShape));
     }
-    if(activeShape == "circle"){
+    if(dragObj instanceof Circle){
         hotSpotObjects.push(new Circle(newShape));
     }
 }

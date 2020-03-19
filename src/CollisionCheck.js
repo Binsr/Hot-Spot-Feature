@@ -12,6 +12,45 @@ export default class CollisionCheck{
 
     //0 za Y kordinatu je vrhs stranice ne dno
 
+    static doesObjsCollide(dragObj,hotSpotObjects){
+
+            if(dragObj instanceof Rect){ //IZMENI kad dodas koliziju za krug //SVE PREBACI U CHECK COLLISION KLASU       
+                for(let i= 0; i < hotSpotObjects.length; i++){
+                    if(hotSpotObjects[i] instanceof Circle) 
+                        if(this.doesCircleRectCol(hotSpotObjects[i],dragObj)){
+                            return true;
+                        }else{
+                            continue;
+                        }
+                    
+                    if(this.doesRectRectCol(hotSpotObjects[i],dragObj)){
+                        return true;
+                    }
+                    else
+                        continue;
+                }
+                return false;
+            }
+        if(dragObj instanceof Circle){
+                for(let i= 0; i < hotSpotObjects.length; i++){
+                    if(hotSpotObjects[i] instanceof Circle) 
+                        if(this.doesCircleCircleCol(dragObj,hotSpotObjects[i])){
+                            return true;
+                        }else{
+                            continue;
+                        }
+                    
+                    if(this.doesCircleRectCol(dragObj,hotSpotObjects[i])){
+                        return true;
+                    }else{
+                        continue;
+                    }
+                }
+                return false;
+        }  
+    }
+
+
     static doesCircleRectCol(circle,rect){
 
         let rectAngleCoord= rect.getCoordOfAllAngles();
