@@ -18,6 +18,10 @@ export default class Circle{
         return {r: this.r, cx: this.centerX, cy: this.centerY};
     }
 
+    getColor(){
+        return this.color;
+    }
+
     setColor(color){
         this.color= color;
     }

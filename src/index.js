@@ -51,16 +51,16 @@ document.getElementById("undo").addEventListener("click", function(){
 
 document.getElementById("colisionContainer").addEventListener("click", function(){ 
     console.log("Colision btn clicked");
-    if(!collision){
+    if(!collisionAllowed){
         document.getElementById("colisionOnOf").style.backgroundColor= "green";
         document.getElementById("colisionOnOf").innerText= "On";
-        collision= true;
-        dragRect.setColor("white");
+        collisionAllowed= true;
+        dragObj.setColor("white");
     }else{
         document.getElementById("colisionOnOf").style.backgroundColor= "red";
         document.getElementById("colisionOnOf").innerText= "Off";
-        collision= false;
-        dragRect.setColor("white");
+        collisionAllowed= false;
+        dragObj.setColor("white");
     }
 
 });
@@ -112,11 +112,12 @@ function dragStop(event){
     showDragObj= false;
 
     if(dragObj instanceof Rect){
-        if(dragRect.getColor() != "red" || collisionAllowed)
+        if(dragObj.getColor() != "red" || collisionAllowed)
             hotSpotObjects.push(new Rect(newShape));
     }
     if(dragObj instanceof Circle){
-        hotSpotObjects.push(new Circle(newShape));
+        if(dragObj.getColor() != "red" || collisionAllowed)
+            hotSpotObjects.push(new Circle(newShape));
     }
 }
 
