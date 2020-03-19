@@ -8,11 +8,9 @@ const IMG_HEIGHT = 600;
 const IMG_POS_X= 0;
 const IMG_POS_Y= 0;
 
-
 let canvas= document.getElementById("slika");
 let ctx= canvas.getContext("2d");
 
-let hotSpotObjects= [];
 let newShape={
     startX: null,
     startY: null,
@@ -20,36 +18,46 @@ let newShape={
     endY: null
 };
 
-let dragRect= new Rect(newShape);
-let dragCircle= new Circle(newShape);
+const dragRect= new Rect(newShape);
+const dragCircle= new Circle(newShape);
+const hotSpotObjects= [];
+
+canvas.addEventListener('mousedown',dragStart,false);
+canvas.addEventListener('mousemove',drag,false);
+canvas.addEventListener('mouseup',dragStop,false);
+
+document.getElementById("colisionContainer").addEventListener("click",colisionBtnClick);
+document.getElementById("rect").addEventListener("click", rectBtnClick);
+document.getElementById("circle").addEventListener("click", circleBtnClick);
+document.getElementById("undo").addEventListener("click", undoBtnClick); 
+document.getElementById("shapeBtn").addEventListener("click", shapeBtnClick);
+
 
 let dragObj= null;
-
 let showDragObj= false;
-
 let collisionAllowed= false;
 
-document.getElementById("rect").addEventListener("click", function(){ 
+function rectBtnClick(){ 
         console.log("Rect clicked");
         document.getElementById("shapList").style.visibility= "hidden";
         document.getElementById("shapeBtn").innerText= "Rect";
         dragObj= dragRect;
-});
+}
 
-document.getElementById("circle").addEventListener("click", function(){ 
+function circleBtnClick(){ 
         console.log("Circle clicked");
         document.getElementById("shapList").style.visibility= "hidden";
         document.getElementById("shapeBtn").innerText= "Circle";
         dragObj= dragCircle;
-});
+}
 
-document.getElementById("undo").addEventListener("click", function(){ 
+function undoBtnClick(){ 
     console.log("undo clicked");
     hotSpotObjects.pop();
-});
+}
 
 
-document.getElementById("colisionContainer").addEventListener("click", function(){ 
+function colisionBtnClick(){ 
     console.log("Colision btn clicked");
     if(!collisionAllowed){
         document.getElementById("colisionOnOf").style.backgroundColor= "green";
@@ -63,12 +71,11 @@ document.getElementById("colisionContainer").addEventListener("click", function(
         dragObj.setColor("white");
     }
 
-});
+}
 
-document.getElementById("shapeBtn").addEventListener("click", function(){ 
+function shapeBtnClick(){ 
     document.getElementById("shapList").style.visibility = "visible"; 
-});
-
+}
 
 //-------------------------------------------------------------------------------------------------------------------
 
@@ -121,9 +128,6 @@ function dragStop(event){
     }
 }
 
-canvas.addEventListener('mousedown',dragStart,false);
-canvas.addEventListener('mousemove',drag,false);
-canvas.addEventListener('mouseup',dragStop,false);
 
 //-------------------------------------------------------------------------------------------------------------------
 
@@ -141,7 +145,6 @@ function draw(){
 
 let lastTime= 0;
 function gameLoop(timeStamp){
-    let deltaTime= timeStamp - lastTime;
     lastTime= timeStamp;
     draw();
     requestAnimationFrame(gameLoop);
