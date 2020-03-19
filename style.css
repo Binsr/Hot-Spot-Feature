@@ -46,7 +46,7 @@
 
 #undo{
     position: relative;
-    margin-top: 450px;
+    margin-top: 440px;
     left: 0;
     width: 80px;
     background-color: rgb(155, 196, 155);
@@ -67,4 +67,10 @@
     width: 30px;
     background-color: red;
     text-align: center;
+}
+
+#infoClick{
+    margin: 10px 0 0 0 ;
+    width:  100px;
+    background-color: rgb(223, 191, 191);
 }

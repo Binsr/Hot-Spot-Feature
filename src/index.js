@@ -1,7 +1,7 @@
 import Rect from './Rect.js';
 import Circle from './Circle.js';
 import CollisionCheck from './CollisionCheck.js';
-
+import ClickInfo from './ClickInfo.js';
 
 const IMG_WIDTH = 700;
 const IMG_HEIGHT = 600;
@@ -22,7 +22,7 @@ const dragRect= new Rect(newShape);
 const dragCircle= new Circle(newShape);
 const hotSpotObjects= [];
 
-canvas.addEventListener('mousedown',dragStart,false);
+canvas.addEventListener('mousedown',mouseClick,false);
 canvas.addEventListener('mousemove',drag,false);
 canvas.addEventListener('mouseup',dragStop,false);
 
@@ -31,13 +31,16 @@ document.getElementById("rect").addEventListener("click", rectBtnClick);
 document.getElementById("circle").addEventListener("click", circleBtnClick);
 document.getElementById("undo").addEventListener("click", undoBtnClick); 
 document.getElementById("shapeBtn").addEventListener("click", shapeBtnClick);
+document.getElementById("infoClick").addEventListener("click", infoClickBtnClick);
 
 
 let dragObj= null;
 let showDragObj= false;
 let collisionAllowed= false;
+let infoClickActive= false;
 
 function rectBtnClick(){ 
+        infoClickActive= false;
         console.log("Rect clicked");
         document.getElementById("shapList").style.visibility= "hidden";
         document.getElementById("shapeBtn").innerText= "Rect";
@@ -45,6 +48,7 @@ function rectBtnClick(){
 }
 
 function circleBtnClick(){ 
+        infoClickActive= false;
         console.log("Circle clicked");
         document.getElementById("shapList").style.visibility= "hidden";
         document.getElementById("shapeBtn").innerText= "Circle";
@@ -63,12 +67,14 @@ function colisionBtnClick(){
         document.getElementById("colisionOnOf").style.backgroundColor= "green";
         document.getElementById("colisionOnOf").innerText= "On";
         collisionAllowed= true;
-        dragObj.setColor("white");
+        if(dragObj)
+            dragObj.setColor("white");
     }else{
         document.getElementById("colisionOnOf").style.backgroundColor= "red";
         document.getElementById("colisionOnOf").innerText= "Off";
         collisionAllowed= false;
-        dragObj.setColor("white");
+        if(dragObj)
+            dragObj.setColor("white");
     }
 
 }
@@ -76,6 +82,12 @@ function colisionBtnClick(){
 function shapeBtnClick(){ 
     document.getElementById("shapList").style.visibility = "visible"; 
 }
+
+function infoClickBtnClick(){
+    infoClickActive= true;
+    document.getElementById("shapeBtn").innerText= "Chose Shape";
+}
+
 
 //-------------------------------------------------------------------------------------------------------------------
 
@@ -86,17 +98,30 @@ function getCanvasCoordinates(event){
     return {x: x, y: y};
 }
 
-function dragStart(event){
+function mouseClick(event){
     let coordinates= getCanvasCoordinates(event);
+    if(infoClickActive){
+        console.log(ClickInfo.getClickedObj(coordinates,hotSpotObjects));
+        return;
+    }else{
+        dragStart(coordinates);
+    }
+
+}
+
+function dragStart(coordinates){
     newShape.startX= coordinates.x;
     newShape.startY= coordinates.y;
     showDragObj= true;
     if(dragObj)
         dragObj.updateCord(newShape);
-    
 }
 
+
 function drag(event){
+    if(infoClickActive)
+        return;
+
     let coordinates= getCanvasCoordinates(event);
     newShape.endX= coordinates.x;
     newShape.endY= coordinates.y;
@@ -115,6 +140,7 @@ function drag(event){
 }
 
 function dragStop(event){
+
     let coordinates= getCanvasCoordinates(event);
     showDragObj= false;
 
