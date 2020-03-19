@@ -115,49 +115,17 @@ export default class Rect{
                 };
             }
         }
+
+        //DEO ZA PREPRAVITI POMESAO KORDINATU Y, GLEDAO JE KAO DA JOJ JE 0 DOLE A NE U VRHU STRANICE***
+        let tmp = pointsOfAngles.leftUp;
+        pointsOfAngles.leftUp= pointsOfAngles.leftDown;
+        pointsOfAngles.leftDown= tmp;
+
+        tmp= pointsOfAngles.rightUp;
+        pointsOfAngles.rightUp= pointsOfAngles.rightDown;
+        pointsOfAngles.rightDown= tmp;
+        //----------------------------------------------------------------------------------------------
         return pointsOfAngles;
-    }
-
-    showColision(shapesList){
-        let l1= {
-            x: this.startPos.x,
-            y: this.startPos.y
-        };
-        let d1= {
-            x: this.endPos.x,
-            y: this.endPos.y
-        };
-
-        for(let i= 0; i < shapesList.length; i++){
-            if(shapesList[i] instanceof Circle)
-                continue;
-            let l2= shapesList[i].getStartPos();
-            let d2= shapesList[i].getEndPos();
-
-            if(d1.x < l2.x && d1.x < d2.x && l1.x < l2.x && l1.x < d2.x){
-                this.lineColor= "white";
-                continue;
-            }
-            if(d1.x > l2.x && d1.x > d2.x && l1.x > l2.x && l1.x > d2.x){
-                this.lineColor= "white";
-                continue;
-            }
-
-            if(d1.y < l2.y && d1.y < d2.y && l1.y < l2.y && l1.y < d2.y){
-                this.lineColor= "white";
-                continue;
-            }
-
-            if(d1.y > l2.y && d1.y > d2.y && l1.y > l2.y && l1.y > d2.y){
-                this.lineColor= "white";
-                continue;
-            }
-
-            else{
-                this.lineColor= "red";
-                return;
-            }
-        }
     }
 
     draw(ctx){

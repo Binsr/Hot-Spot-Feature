@@ -1,5 +1,7 @@
-import Rect from "./Rect.js";
-import Circle from "./Circle.js";
+import Rect from './Rect.js';
+import Circle from './Circle.js';
+import CollisionCheck from './CollisionCheck.js';
+
 
 const IMG_WIDTH = 700;
 const IMG_HEIGHT = 600;
@@ -96,8 +98,33 @@ function drag(event){
     if(dragObj)
         dragObj.updateCord(newShape);
     if(dragObj == dragRect) //IZMENI kad dodas koliziju za krug
-        if(!collision)
-            dragRect.showColision(hotSpotObjects);
+        if(!collision){            
+            for(let i= 0; i < hotSpotObjects.length; i++){
+                if(hotSpotObjects[i] instanceof Circle) 
+                    continue;
+                
+                if(CollisionCheck.doesRectRectCol(hotSpotObjects[i],dragRect)){
+                    dragRect.setColor("red");
+                    break;
+                }
+                else
+                    dragRect.setColor("white");
+            }
+        }
+    if(dragObj == dragCircle)
+        if(!collision){
+            for(let i= 0; i < hotSpotObjects.length; i++){
+                if(hotSpotObjects[i] instanceof Circle) 
+                    continue;
+                
+                if(CollisionCheck.doesCircleRectCol(dragCircle,hotSpotObjects[i])){
+                    dragCircle.setColor("red");
+                    break;
+                }else{
+                    dragCircle.setColor("white");
+                }
+        }
+    }
 }
 
 function dragStop(event){
