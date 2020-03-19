@@ -97,11 +97,17 @@ function drag(event){
     newShape.endY= coordinates.y;
     if(dragObj)
         dragObj.updateCord(newShape);
-    if(dragObj == dragRect) //IZMENI kad dodas koliziju za krug
+    if(dragObj == dragRect) //IZMENI kad dodas koliziju za krug //SVE PREBACI U CHECK COLLISION KLASU
         if(!collision){            
             for(let i= 0; i < hotSpotObjects.length; i++){
                 if(hotSpotObjects[i] instanceof Circle) 
-                    continue;
+                    if(CollisionCheck.doesCircleRectCol(hotSpotObjects[i],dragObj)){
+                        dragObj.setColor("red");
+                        break;
+                    }else{
+                        dragObj.setColor("white");
+                        continue;
+                    }
                 
                 if(CollisionCheck.doesRectRectCol(hotSpotObjects[i],dragRect)){
                     dragRect.setColor("red");
@@ -115,7 +121,13 @@ function drag(event){
         if(!collision){
             for(let i= 0; i < hotSpotObjects.length; i++){
                 if(hotSpotObjects[i] instanceof Circle) 
-                    continue;
+                    if(CollisionCheck.doesCircleCircleCol(dragObj,hotSpotObjects[i])){
+                        dragObj.setColor("red");
+                        break;
+                    }else{
+                        dragObj.setColor("white");
+                        continue;
+                    }
                 
                 if(CollisionCheck.doesCircleRectCol(dragCircle,hotSpotObjects[i])){
                     dragCircle.setColor("red");

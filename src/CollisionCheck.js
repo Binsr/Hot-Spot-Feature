@@ -129,4 +129,22 @@ export default class CollisionCheck{
                 return true;
             }
     }
+
+    static doesCircleCircleCol(circle1,circle2){
+        let circleEl1= circle1.getElements();
+        let circleEl2= circle2.getElements();
+
+        let x1= circleEl1.cx;
+        let y1= circleEl1.cy;
+        let x2= circleEl2.cx;
+        let y2= circleEl2.cy;
+
+        let dist= Math.sqrt(Math.pow(x1-x2,2) + Math.pow(y1-y2,2));
+
+        if(dist > circleEl1.r + circleEl2.r){
+            return false;
+        }else{
+            return true;
+        }
+    }
 }
