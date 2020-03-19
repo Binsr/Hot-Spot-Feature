@@ -1,0 +1,70 @@
+.Shapes{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+.container{
+    display: flex;
+    flex-direction: row;
+}
+
+.shapeList{
+    display: flex;
+    flex-direction: column;
+    visibility: hidden;
+}
+
+.shape{
+    background-color: rgb(190, 190, 211);
+    text-align: center;
+    width: 200px;
+}
+
+.choseShape{
+    background-color: rgb(233, 233, 255);
+    width: 200px;
+    text-align: center;
+}
+
+.menu{
+    width: 200px;
+    height: 600px;
+    background-color: gray;
+    position: relative;
+}
+
+#submitBtn{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    background-color: rgb(0, 0, 160);
+    color: white;
+    width: 80px;
+    text-align: center;
+}
+
+#undo{
+    position: relative;
+    margin-top: 450px;
+    left: 0;
+    width: 80px;
+    background-color: rgb(155, 196, 155);
+}
+
+#colisionContainer{
+    display: flex;
+    flex-direction: row;
+    margin: 10px 0 0 0;
+    font-size: 15px;
+}
+.colisionPara{
+    background-color: aqua;
+    height: 20px;
+    width: 70px;
+}
+#colisionOnOf{
+    width: 30px;
+    background-color: red;
+    text-align: center;
+}

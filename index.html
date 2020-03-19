@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Feature</title>
+        <link rel="stylesheet" type="text/css" href="style.css">
+    </head>
+    <body>
+        <div class="container">
+            <canvas id="slika" width="700px" height="600px"></canvas>
+            <div class="menu">
+                <div class="Shapes">
+                    <div class="choseShape" id="shapeBtn">Chose shape</div>
+                    <div id="shapList" class="shapeList">
+                        <div id="circle" class="shape">Circle</div> 
+                        <div id="rect" class="shape">Rect</div> 
+                    </div>
+                </div>
+                <div id="colisionContainer">
+                    <div class="colisionPara">Colision</div>
+                    <div id="colisionOnOf">Off</div>
+                </div>
+                <div id="undo">Undo</div>
+                <div id="submitBtn">Subbmit</div>
+            </div>
+        </div>
+        <script type="module" src="./src/index.js"></script>
+    </body>
+</html>
