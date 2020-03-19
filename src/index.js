@@ -2,6 +2,7 @@ import Rect from './Rect.js';
 import Circle from './Circle.js';
 import CollisionCheck from './CollisionCheck.js';
 import ClickInfo from './ClickInfo.js';
+import ClickAnimation from './ClickAnimation.js'
 
 const IMG_WIDTH = 700;
 const IMG_HEIGHT = 600;
@@ -21,6 +22,7 @@ let newShape={
 const dragRect= new Rect(newShape);
 const dragCircle= new Circle(newShape);
 const hotSpotObjects= [];
+let clickAnimation= new ClickAnimation();
 
 canvas.addEventListener('mousedown',mouseClick,false);
 canvas.addEventListener('mousemove',drag,false);
@@ -101,6 +103,7 @@ function getCanvasCoordinates(event){
 function mouseClick(event){
     let coordinates= getCanvasCoordinates(event);
     if(infoClickActive){
+        clickAnimation.startAnimation(coordinates);
         console.log(ClickInfo.getClickedObj(coordinates,hotSpotObjects));
         return;
     }else{
@@ -157,7 +160,7 @@ function dragStop(event){
 
 //-------------------------------------------------------------------------------------------------------------------
 
-function draw(){
+function draw(ctx){
     ctx.clearRect(IMG_POS_X,IMG_POS_Y, IMG_WIDTH, IMG_HEIGHT); 
     ctx.fillStyle= "black";
     ctx.fillRect(IMG_POS_X, IMG_POS_Y, IMG_WIDTH, IMG_HEIGHT);
@@ -167,12 +170,17 @@ function draw(){
     }
     if(showDragObj && dragObj)
         dragObj.draw(ctx);
+    if(clickAnimation.isAnimActive() && infoClickActive){
+        clickAnimation.draw(ctx);
+        clickAnimation.updateTimer();
+    }
 }
 
 let lastTime= 0;
 function gameLoop(timeStamp){
     lastTime= timeStamp;
-    draw();
+    draw(ctx);
+    clickAnimation.updateTimer();
     requestAnimationFrame(gameLoop);
 }
 
