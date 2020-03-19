@@ -88,6 +88,12 @@ function shapeBtnClick(){
 function infoClickBtnClick(){
     infoClickActive= true;
     document.getElementById("shapeBtn").innerText= "Chose Shape";
+    newShape={
+        startX: null,
+        startY: null,
+        endX: null,
+        endY: null
+    };
 }
 
 
