@@ -1,0 +1,7 @@
+index.html je potrebno pokrenuti u mozili ali pre toga je potrebno uraditi sledecu stvar kako bi se zaobisao problem sa CORS policy-jem:
+
+Open Firefox and type about:config into the URL bar. search for: security.fileuri.strict_origin_policy set to false
+Then open index.html in Firefox
+
+
+

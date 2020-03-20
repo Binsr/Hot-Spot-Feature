@@ -46,7 +46,7 @@
 
 #undo{
     position: relative;
-    margin-top: 440px;
+    margin-top: 370px;
     left: 0;
     width: 80px;
     background-color: rgb(155, 196, 155);
@@ -73,4 +73,12 @@
     margin: 10px 0 0 0 ;
     width:  100px;
     background-color: rgb(223, 191, 191);
+    text-align: center;
+}
+
+#picUploadBtn{
+    margin-top: 10px;
+    width: 100px;
+    background-color: rgb(68, 61, 61);
+    text-align: center;
 }

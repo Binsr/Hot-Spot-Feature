@@ -34,6 +34,7 @@ document.getElementById("circle").addEventListener("click", circleBtnClick);
 document.getElementById("undo").addEventListener("click", undoBtnClick); 
 document.getElementById("shapeBtn").addEventListener("click", shapeBtnClick);
 document.getElementById("infoClick").addEventListener("click", infoClickBtnClick);
+document.getElementById("picUploadBtn").addEventListener("click", uploadPic);
 
 
 let dragObj= null;
@@ -80,6 +81,11 @@ function colisionBtnClick(){
     }
 
 }
+
+function uploadPic(){
+    console.log("Upload Pic");
+}
+
 
 function shapeBtnClick(){ 
     document.getElementById("shapList").style.visibility = "visible"; 
