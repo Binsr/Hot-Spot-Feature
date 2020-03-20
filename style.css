@@ -20,11 +20,27 @@
     text-align: center;
     width: 200px;
 }
+#circle{
+    border-style: solid;
+    border-width: 2px 0 0 0;
+    border-color: black;
+}
+
+#rect{
+    border-style: solid;
+    border-width: 2px 0 2px 0;
+    border-color: black;
+}
 
 .choseShape{
     background-color: rgb(233, 233, 255);
     width: 200px;
     text-align: center;
+    height: 30px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .menu{
@@ -32,6 +48,9 @@
     height: 600px;
     background-color: gray;
     position: relative;
+    border-style: solid;
+    border-width: 3px;
+    border-color: black;
 }
 
 #submitBtn{
@@ -40,45 +59,75 @@
     left: 0;
     background-color: rgb(0, 0, 160);
     color: white;
-    width: 80px;
+    width: 100%;
     text-align: center;
 }
 
 #undo{
     position: relative;
-    margin-top: 370px;
-    left: 0;
-    width: 80px;
+    margin: auto auto auto auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 40px;
+    width: 40px;
     background-color: rgb(155, 196, 155);
+    border-radius: 50%;
 }
 
 #colisionContainer{
     display: flex;
-    flex-direction: row;
-    margin: 10px 0 0 0;
+    flex-direction: column;
+    margin: 50px 0 0 0;
     font-size: 15px;
+    text-align: center;
+
 }
 .colisionPara{
-    background-color: aqua;
+    background-color: rgb(172, 172, 172);
     height: 20px;
     width: 70px;
+    margin: auto auto auto auto;
+
 }
 #colisionOnOf{
     width: 30px;
     background-color: red;
     text-align: center;
+    margin: auto auto auto auto;
+
+    border-width: 2px;
+    border-style: solid;
+    border-color: rgb(80, 0, 0);
 }
 
 #infoClick{
-    margin: 10px 0 0 0 ;
-    width:  100px;
-    background-color: rgb(223, 191, 191);
-    text-align: center;
+    position: relative;
+    margin: 10px auto 10px auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 40px;
+    width: 40px;
+    background-color: rgb(155, 196, 155);
+    border-radius: 50%;
 }
 
 #picUploadBtn{
-    margin-top: 10px;
+    margin: 0% auto;
     width: 100px;
     background-color: rgb(68, 61, 61);
     text-align: center;
+}
+
+#slika{
+    width: 0;
+    border-width: 3px;
+    border-color: black;
+    border-width: 0px;
+    border-style: solid;
+}
+#uploadPicBackground{
+    width: 700px;
+    height: 600px;
 }

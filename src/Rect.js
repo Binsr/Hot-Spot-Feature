@@ -4,7 +4,7 @@ export default class Rect{
 
     constructor(positions){
 
-        this.lineColor= "white";
+        this.lineColor= "green";
 
         this.startPos={
             x: positions.startX,
@@ -130,7 +130,7 @@ export default class Rect{
 
     draw(ctx){
         ctx.strokeStyle= this.lineColor;
-        ctx.lineWidth = 2;
+        ctx.lineWidth= 4;
         ctx.strokeRect(this.startPos.x,this.startPos.y,this.endPos.x-this.startPos.x,this.endPos.y-this.startPos.y);
     }
 }

@@ -34,8 +34,8 @@ export default class ClickAnimation{
     }
 
     draw(ctx){
-        ctx.lineWidth = 1;
-        ctx.strokeStyle= "#a0fff9";
+        ctx.lineWidth = 4;
+        ctx.strokeStyle= "green";
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.r, 0, 2 * Math.PI);
         ctx.stroke();

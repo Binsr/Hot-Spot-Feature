@@ -10,6 +10,9 @@
     <body>
         <div class="container">
             <canvas id="slika" width="700px" height="600px"></canvas>
+            <div id="uploadPicBackground">
+                <input type="file" name="inpFile" id="inpFile"> 
+                </div>  
             <div class="menu">
                 <div class="Shapes">
                     <div class="choseShape" id="shapeBtn">Chose shape</div>
@@ -22,10 +25,9 @@
                     <div class="colisionPara">Colision</div>
                     <div id="colisionOnOf">Off</div>
                 </div>
-                <div id="infoClick">Info click</div>
-                <div id="picUploadBtn">Upload Picture</div>
-                <div id="undo">Undo</div>
-                <div id="submitBtn">Subbmit</div>
+                <div id="infoClick">Info</div>
+                <div id="undo"><-</div>
+                <div id="submitBtn">Submit</div>
             </div>
         </div>
         <script type="module" src="./src/index.js"></script>
