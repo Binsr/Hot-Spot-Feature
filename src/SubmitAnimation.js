@@ -70,6 +70,10 @@ export default class SubmitAnimation{
     }
 
     draw(ctx){
+        ctx.globalAlpha = 0.75;
+        ctx.fillStyle= "gray";
+        ctx.fillRect(0,0,700,600);
+        ctx.globalAlpha = 1.0;
 
         ctx.lineWidth= 40;
         ctx.strokeStyle = 'blue';
