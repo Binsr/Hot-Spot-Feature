@@ -2,7 +2,13 @@ export default class Circle{
 
     constructor(positions){
 
-        this.color= "green"
+        this.colorInColision= "red";
+        this.defaultColor= "green";
+
+        this.colision= null;
+
+        this.color= this.defaultColor;
+
         this.centerX= (positions.startX + positions.endX)/2;
         this.centerY= (positions.startY + positions.endY)/2;
         this.r= (Math.sqrt(Math.pow(positions.startX-positions.endX,2) + Math.pow(positions.startY - positions.endY,2)))/2;
@@ -18,12 +24,19 @@ export default class Circle{
         return {r: this.r, cx: this.centerX, cy: this.centerY};
     }
 
-    getColor(){
-        return this.color;
+    inColision(){
+        return this.colision;
     }
 
-    setColor(color){
-        this.color= color;
+    setColor(status){
+        if(status == "colision"){
+            this.color= this.colorInColision;
+            this.colision= true;
+        }
+        else{
+            this.color= this.defaultColor;
+            this.colision= false;
+        }
     }
 
     draw(ctx){

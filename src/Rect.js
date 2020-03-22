@@ -4,7 +4,11 @@ export default class Rect{
 
     constructor(positions){
 
-        this.lineColor= "green";
+        this.colorInColision= "red";
+        this.defaultColor= "green";
+        this.colision= null;
+
+        this.color= this.defaultColor;
 
         this.startPos={
             x: positions.startX,
@@ -16,13 +20,22 @@ export default class Rect{
             y: positions.endY
         }
     }
-    getColor(){
-        return this.lineColor;
+
+    inColision(){
+        return this.colision;
     }
 
-    setColor(color){
-        this.lineColor= color;
+    setColor(status){
+        if(status == "colision"){
+            this.color= this.colorInColision;
+            this.colision= true;
+        }
+        else{
+            this.color= this.defaultColor;
+            this.colision= false;
+        }
     }
+
     updateCord(coordinates){
         this.endPos.x= coordinates.endX;
         this.endPos.y= coordinates.endY;
@@ -129,7 +142,7 @@ export default class Rect{
     }
 
     draw(ctx){
-        ctx.strokeStyle= this.lineColor;
+        ctx.strokeStyle= this.color;
         ctx.lineWidth= 4;
         ctx.strokeRect(this.startPos.x,this.startPos.y,this.endPos.x-this.startPos.x,this.endPos.y-this.startPos.y);
     }

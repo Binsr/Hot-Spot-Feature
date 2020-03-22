@@ -76,13 +76,13 @@ function colisionBtnClick(){
         document.getElementById("colision-container__on-of-btn").innerText= "On";
         collisionAllowed= true;
         if(dragObj)
-            dragObj.setColor("green");
+            dragObj.setColor("default");
     }else{
         document.getElementById("colision-container__on-of-btn").style.backgroundColor= "red";
         document.getElementById("colision-container__on-of-btn").innerText= "Off";
         collisionAllowed= false;
         if(dragObj)
-            dragObj.setColor("green");
+            dragObj.setColor("default");
     }
 
 }
@@ -176,13 +176,13 @@ function drag(event){
     if(!collisionAllowed){
         if(CollisionCheck.doesObjsCollide(dragObj,hotSpotObjects)){
             if(dragObj)
-                dragObj.setColor("red");
+                dragObj.setColor("colision");
         }else{
             if(dragObj)
-                dragObj.setColor("green");
+                dragObj.setColor("default");
         }
     }else{
-        dragObj.setColor("green");
+        dragObj.setColor("default");
     }
 }
 
@@ -192,11 +192,11 @@ function dragStop(event){
     showDragObj= false;
 
     if(dragObj instanceof Rect){
-        if(dragObj.getColor() != "red" || collisionAllowed)
+        if(!dragObj.inColision() || collisionAllowed)
             hotSpotObjects.push(new Rect(newShape));
     }
     if(dragObj instanceof Circle){
-        if(dragObj.getColor() != "red" || collisionAllowed)
+        if(!dragObj.inColision() || collisionAllowed)
             hotSpotObjects.push(new Circle(newShape));
     }
 }
