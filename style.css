@@ -1,15 +1,15 @@
-.Shapes{
+.drawing-shapes{
     position: relative;
     display: flex;
     flex-direction: column;
 }
 
-.container{
+.app{
     display: flex;
     flex-direction: row;
 }
 
-.shapeList{
+.drawing-shapes__list{
     display: flex;
     flex-direction: column;
     visibility: hidden;
@@ -32,7 +32,7 @@
     border-color: black;
 }
 
-.choseShape{
+.drawing-shapes__btn{
     background-color: rgb(233, 233, 255);
     width: 200px;
     text-align: center;
@@ -43,7 +43,7 @@
     align-items: center;
 }
 
-.menu{
+.tools-container{
     width: 200px;
     height: 600px;
     background-color: gray;
@@ -53,7 +53,7 @@
     border-color: black;
 }
 
-#submitBtn{
+#submit-btn{
     position: absolute;
     bottom: 0;
     left: 0;
@@ -63,7 +63,7 @@
     text-align: center;
 }
 
-#undo{
+#undo-btn{
     position: relative;
     margin: auto auto auto auto;
     display: flex;
@@ -75,7 +75,7 @@
     border-radius: 50%;
 }
 
-#colisionContainer{
+#colision-container{
     display: flex;
     flex-direction: column;
     margin: 50px 0 0 0;
@@ -83,14 +83,14 @@
     text-align: center;
 
 }
-.colisionPara{
+.colision-container__text-div{
     background-color: rgb(172, 172, 172);
     height: 20px;
     width: 70px;
     margin: auto auto auto auto;
 
 }
-#colisionOnOf{
+#colision-container__on-of-btn{
     width: 30px;
     background-color: red;
     text-align: center;
@@ -101,7 +101,7 @@
     border-color: rgb(80, 0, 0);
 }
 
-#infoClick{
+#info-btn{
     position: relative;
     margin: 10px auto 10px auto;
     display: flex;
@@ -120,14 +120,14 @@
     text-align: center;
 }
 
-#slika{
+#canvas-element{
     width: 0;
     border-width: 3px;
     border-color: black;
     border-width: 0px;
     border-style: solid;
 }
-#uploadPicBackground{
+#input-container{
     width: 700px;
     height: 600px;
 }

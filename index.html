@@ -8,26 +8,26 @@
         <link rel="stylesheet" type="text/css" href="style.css">
     </head>
     <body>
-        <div class="container">
-            <canvas id="slika" width="700px" height="600px"></canvas>
-            <div id="uploadPicBackground">
-                <input type="file" name="inpFile" id="inpFile"> 
-                </div>  
-            <div class="menu">
-                <div class="Shapes">
-                    <div class="choseShape" id="shapeBtn">Chose shape</div>
-                    <div id="shapList" class="shapeList">
-                        <div id="circle" class="shape">Circle</div> 
-                        <div id="rect" class="shape">Rect</div> 
+        <div class="app">
+            <canvas id="canvas-element" width="700px" height="600px"></canvas>
+            <div id="input-container">
+                <input type="file" id="input-container__img-input"> 
+            </div>  
+            <div class="tools-container">
+                <div class="drawing-shapes">
+                    <div class="drawing-shapes__btn" id="drawing-shapes__btn">Chose shape</div>
+                    <div id="drawing-shapes__list" class="drawing-shapes__list">
+                        <div id="drawing-shapes__list__circle-btn" class="shape">Circle</div> 
+                        <div id="drawing-shapes__list__rect-btn" class="shape">Rect</div> 
                     </div>
                 </div>
-                <div id="colisionContainer">
-                    <div class="colisionPara">Colision</div>
-                    <div id="colisionOnOf">Off</div>
+                <div id="colision-container">
+                    <div class="colision-container__text-div">Colision</div>
+                    <div id="colision-container__on-of-btn">Off</div>
                 </div>
-                <div id="infoClick">Info</div>
-                <div id="undo"><-</div>
-                <div id="submitBtn">Submit</div>
+                <div id="info-btn">Info</div>
+                <div id="undo-btn"><-</div>
+                <div id="submit-btn">Submit</div>
             </div>
         </div>
         <script type="module" src="./src/index.js"></script>

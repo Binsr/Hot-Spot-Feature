@@ -10,7 +10,7 @@ const IMG_HEIGHT = 600;
 const IMG_POS_X= 0;
 const IMG_POS_Y= 0;
 
-let canvas= document.getElementById("slika");
+let canvas= document.getElementById("canvas-element");
 let ctx= canvas.getContext("2d");
 
 let newShape={
@@ -30,15 +30,15 @@ canvas.addEventListener('mousedown',mouseClick,false);
 canvas.addEventListener('mousemove',drag,false);
 canvas.addEventListener('mouseup',dragStop,false);
 
-document.getElementById("colisionContainer").addEventListener("click",colisionBtnClick);
-document.getElementById("rect").addEventListener("click", rectBtnClick);
-document.getElementById("circle").addEventListener("click", circleBtnClick);
-document.getElementById("undo").addEventListener("click", undoBtnClick); 
-document.getElementById("shapeBtn").addEventListener("click", shapeBtnClick);
-document.getElementById("infoClick").addEventListener("click", infoClickBtnClick);
-document.getElementById("submitBtn").addEventListener("click",submitCilck);
+document.getElementById("colision-container__on-of-btn").addEventListener("click",colisionBtnClick);
+document.getElementById("drawing-shapes__list__rect-btn").addEventListener("click", rectBtnClick);
+document.getElementById("drawing-shapes__list__circle-btn").addEventListener("click", circleBtnClick);
+document.getElementById("undo-btn").addEventListener("click", undoBtnClick); 
+document.getElementById("drawing-shapes__btn").addEventListener("click", shapeBtnClick);
+document.getElementById("info-btn").addEventListener("click", infoClickBtnClick);
+document.getElementById("submit-btn").addEventListener("click",submitCilck);
 
-const inpFile= document.getElementById("inpFile");
+const inpFile= document.getElementById("input-container__img-input");
 
 inpFile.addEventListener("change", uploadPic);
 
@@ -50,16 +50,16 @@ let infoClickActive= false;
 function rectBtnClick(){ 
         infoClickActive= false;
         console.log("Rect clicked");
-        document.getElementById("shapList").style.visibility= "hidden";
-        document.getElementById("shapeBtn").innerText= "Rect";
+        document.getElementById("drawing-shapes__list").style.visibility= "hidden";
+        document.getElementById("drawing-shapes__btn").innerText= "Rect";
         dragObj= dragRect;
 }
 
 function circleBtnClick(){ 
         infoClickActive= false;
         console.log("Circle clicked");
-        document.getElementById("shapList").style.visibility= "hidden";
-        document.getElementById("shapeBtn").innerText= "Circle";
+        document.getElementById("drawing-shapes__list").style.visibility= "hidden";
+        document.getElementById("drawing-shapes__btn").innerText= "Circle";
         dragObj= dragCircle;
 }
 
@@ -72,14 +72,14 @@ function undoBtnClick(){
 function colisionBtnClick(){ 
     console.log("Colision btn clicked");
     if(!collisionAllowed){
-        document.getElementById("colisionOnOf").style.backgroundColor= "green";
-        document.getElementById("colisionOnOf").innerText= "On";
+        document.getElementById("colision-container__on-of-btn").style.backgroundColor= "green";
+        document.getElementById("colision-container__on-of-btn").innerText= "On";
         collisionAllowed= true;
         if(dragObj)
             dragObj.setColor("green");
     }else{
-        document.getElementById("colisionOnOf").style.backgroundColor= "red";
-        document.getElementById("colisionOnOf").innerText= "Off";
+        document.getElementById("colision-container__on-of-btn").style.backgroundColor= "red";
+        document.getElementById("colision-container__on-of-btn").innerText= "Off";
         collisionAllowed= false;
         if(dragObj)
             dragObj.setColor("green");
@@ -101,7 +101,7 @@ function uploadPic(){
         image.src= this.result;
         console.log(file);
         canvas.style.width= "700px";
-        document.getElementById("uploadPicBackground").setAttribute("style","width:0px");
+        document.getElementById("input-container").setAttribute("style","width:0px");
         canvas.style.borderWidth= "3px 0 3px 3px";
         inpFile.style.visibility= "hidden";
     });
@@ -110,16 +110,16 @@ function uploadPic(){
 
 
 function shapeBtnClick(){ 
-    document.getElementById("shapList").style.visibility = "visible"; 
-    document.getElementById("infoClick").style.backgroundColor= '#9BC49B';
+    document.getElementById("drawing-shapes__list").style.visibility = "visible"; 
+    document.getElementById("info-btn").style.backgroundColor= '#9BC49B';
     infoClickActive= false;
 }
 
 
 function infoClickBtnClick(){
     infoClickActive= true;
-    document.getElementById("shapeBtn").innerText= "Chose Shape";
-    document.getElementById("infoClick").style.backgroundColor= "green";
+    document.getElementById("drawing-shapes__btn").innerText= "Chose Shape";
+    document.getElementById("info-btn").style.backgroundColor= "green";
 
     newShape={
         startX: null,
@@ -205,8 +205,8 @@ function finishSession(){
     canvas.style.width= "0px";
     canvas.style.borderWidth= "0px 0 0px 0px";
     inpFile.style.visibility= "visible";
-    document.getElementById("uploadPicBackground").setAttribute("style","width:700px");
-    document.getElementById("uploadPicBackground").style.borderWidth= "3px 0 3px 3px";
+    document.getElementById("input-container").setAttribute("style","width:700px");
+    document.getElementById("input-container").style.borderWidth= "3px 0 3px 3px";
     hotSpotObjects= [];
 }
 
