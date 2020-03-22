@@ -6,8 +6,8 @@ export default class Shape{
         this.defaultColor= "green";
         this.colision= null;
         this.color= this.defaultColor;
-
         this.lineWidth= 4;
+        
     }
 
     inColision(){
