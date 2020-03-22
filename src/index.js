@@ -116,7 +116,6 @@ function infoClickBtnClick(){
     };
 }
 function submitCilck(){
-    console.log("Submit clicked");
     console.log(hotSpotObjects);
     submitAnimation.startAnimation();
 }
