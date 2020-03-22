@@ -1,35 +1,42 @@
-.drawing-shapes{
-    position: relative;
-    display: flex;
-    flex-direction: column;
-}
-
 .app{
     display: flex;
     flex-direction: row;
 }
 
-.drawing-shapes__list{
+#canvas-element{
+    width: 0;
+    border-width: 3px;
+    border-color: black;
+    border-width: 0px;
+    border-style: solid;
+}
+
+#input-container{
+    width: 700px;
+    height: 600px;
+}
+
+#picUploadBtn{
+    margin: 0% auto;
+    width: 100px;
+    background-color: rgb(68, 61, 61);
+    text-align: center;
+}
+
+.tools-container{
+    width: 200px;
+    height: 600px;
+    background-color: gray;
+    position: relative;
+    border-style: solid;
+    border-width: 3px;
+    border-color: black;
+}
+
+.drawing-shapes{
+    position: relative;
     display: flex;
     flex-direction: column;
-    visibility: hidden;
-}
-
-.shape{
-    background-color: rgb(190, 190, 211);
-    text-align: center;
-    width: 200px;
-}
-#circle{
-    border-style: solid;
-    border-width: 2px 0 0 0;
-    border-color: black;
-}
-
-#rect{
-    border-style: solid;
-    border-width: 2px 0 2px 0;
-    border-color: black;
 }
 
 .drawing-shapes__btn{
@@ -43,38 +50,29 @@
     align-items: center;
 }
 
-.tools-container{
+.drawing-shapes__list{
+    display: flex;
+    flex-direction: column;
+    visibility: hidden;
+}
+
+.drawing-shapes--shape{
+    background-color: rgb(190, 190, 211);
+    text-align: center;
     width: 200px;
-    height: 600px;
-    background-color: gray;
-    position: relative;
+}
+
+#drawing-shapes__list__circle-btn{
     border-style: solid;
-    border-width: 3px;
+    border-width: 2px 0 0 0;
     border-color: black;
 }
 
-#submit-btn{
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    background-color: rgb(0, 0, 160);
-    color: white;
-    width: 100%;
-    text-align: center;
+#drawing-shapes__list__rect-btn{
+    border-style: solid;
+    border-width: 2px 0 2px 0;
+    border-color: black;
 }
-
-#undo-btn{
-    position: relative;
-    margin: auto auto auto auto;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 40px;
-    width: 40px;
-    background-color: rgb(155, 196, 155);
-    border-radius: 50%;
-}
-
 #colision-container{
     display: flex;
     flex-direction: column;
@@ -83,6 +81,7 @@
     text-align: center;
 
 }
+
 .colision-container__text-div{
     background-color: rgb(172, 172, 172);
     height: 20px;
@@ -90,6 +89,7 @@
     margin: auto auto auto auto;
 
 }
+
 #colision-container__on-of-btn{
     width: 30px;
     background-color: red;
@@ -113,21 +113,32 @@
     border-radius: 50%;
 }
 
-#picUploadBtn{
-    margin: 0% auto;
-    width: 100px;
-    background-color: rgb(68, 61, 61);
+#undo-btn{
+    position: relative;
+    margin: auto auto auto auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 40px;
+    width: 40px;
+    background-color: rgb(155, 196, 155);
+    border-radius: 50%;
+}
+
+#submit-btn{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    background-color: rgb(0, 0, 160);
+    color: white;
+    width: 100%;
     text-align: center;
 }
 
-#canvas-element{
-    width: 0;
-    border-width: 3px;
-    border-color: black;
-    border-width: 0px;
-    border-style: solid;
-}
-#input-container{
-    width: 700px;
-    height: 600px;
-}
+
+
+
+
+
+
+
