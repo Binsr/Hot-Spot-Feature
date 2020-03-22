@@ -4,7 +4,7 @@ import CollisionCheck from './CollisionCheck.js';
 import ClickInfo from './ClickInfo.js';
 import ClickAnimation from './ClickAnimation.js';
 import SubmitAnimation from './SubmitAnimation.js';
-import Shape from './Shape.js';
+import ColisionBtn from './ColisionBtn.js';
 
 const IMG_WIDTH = 700;
 const IMG_HEIGHT = 600;
@@ -31,34 +31,47 @@ canvas.addEventListener('mousedown',mouseClick,false);
 canvas.addEventListener('mousemove',drag,false);
 canvas.addEventListener('mouseup',dragStop,false);
 
-document.getElementById("colision-container__on-of-btn").addEventListener("click",colisionBtnClick);
-document.getElementById("drawing-shapes__list__rect-btn").addEventListener("click", rectBtnClick);
-document.getElementById("drawing-shapes__list__circle-btn").addEventListener("click", circleBtnClick);
-document.getElementById("undo-btn").addEventListener("click", undoBtnClick); 
-document.getElementById("drawing-shapes__btn").addEventListener("click", shapeBtnClick);
-document.getElementById("info-btn").addEventListener("click", infoClickBtnClick);
-document.getElementById("submit-btn").addEventListener("click",submitCilck);
+const inputBtn= document.getElementById("input-container__img-input");
+const drawingShapesBtn= document.getElementById("drawing-shapes__btn");
+const drawingShapeRectBtn= document.getElementById("drawing-shapes__list__rect-btn");
+const drawingShapeCircleBtn= document.getElementById("drawing-shapes__list__circle-btn");
+const colisionBtn= new ColisionBtn();
+const infoBtn= document.getElementById("info-btn");
+const undoBtn= document.getElementById("undo-btn");
+const submitBtn= document.getElementById("submit-btn");
 
-const inpFile= document.getElementById("input-container__img-input");
+inputBtn.addEventListener("change", uploadPic);
+drawingShapesBtn.addEventListener("click", shapeBtnClick);
+drawingShapeRectBtn.addEventListener("click", rectBtnClick);
+drawingShapeCircleBtn.addEventListener("click", circleBtnClick);
+document.getElementById("colision-container__on-of-btn").addEventListener("click",colisionClick);
+infoBtn.addEventListener("click", infoClickBtnClick);
+undoBtn.addEventListener("click", undoBtnClick); 
+submitBtn.addEventListener("click",submitCilck);
 
-inpFile.addEventListener("change", uploadPic);
+const inputContainer= document.getElementById("input-container");
+const drawingShapesList= document.getElementById("drawing-shapes__list");
+
 
 let dragObj= null;
 let showDragObj= false;
-let collisionAllowed= false;
 let infoClickActive= false;
+
+function colisionClick(){
+    colisionBtn.clicked();
+}
 
 function rectBtnClick(){ 
         infoClickActive= false;
-        document.getElementById("drawing-shapes__list").style.visibility= "hidden";
-        document.getElementById("drawing-shapes__btn").innerText= "Rect";
+        drawingShapesList.style.visibility= "hidden";
+        drawingShapesBtn.innerText= "Rect";
         dragObj= dragRect;
 }
 
 function circleBtnClick(){ 
         infoClickActive= false;
-        document.getElementById("drawing-shapes__list").style.visibility= "hidden";
-        document.getElementById("drawing-shapes__btn").innerText= "Circle";
+        drawingShapesList.style.visibility= "hidden";
+        drawingShapesBtn.innerText= "Circle";
         dragObj= dragCircle;
 }
 
@@ -66,25 +79,9 @@ function undoBtnClick(){
     hotSpotObjects.pop();
 }
 
-
-function colisionBtnClick(){ 
-    if(!collisionAllowed){
-        document.getElementById("colision-container__on-of-btn").style.backgroundColor= "green";
-        document.getElementById("colision-container__on-of-btn").innerText= "On";
-        collisionAllowed= true;
-        if(dragObj)
-            dragObj.setColor("default");
-    }else{
-        document.getElementById("colision-container__on-of-btn").style.backgroundColor= "red";
-        document.getElementById("colision-container__on-of-btn").innerText= "Off";
-        collisionAllowed= false;
-        if(dragObj)
-            dragObj.setColor("default");
-    }
-
-}
 let image= new Image();
 
+//POTENCIJALNO NOVA KOMPONENTA
 function uploadPic(){
 
     const file= this.files[0];
@@ -95,23 +92,23 @@ function uploadPic(){
         canvas.style.width= "700px";
         document.getElementById("input-container").setAttribute("style","width:0px");
         canvas.style.borderWidth= "3px 0 3px 3px";
-        inpFile.style.visibility= "hidden";
+        inputBtn.style.visibility= "hidden";
     });
     reader.readAsDataURL(file);
 }
 
 
 function shapeBtnClick(){ 
-    document.getElementById("drawing-shapes__list").style.visibility = "visible"; 
-    document.getElementById("info-btn").style.backgroundColor= '#9BC49B';
+    drawingShapesList.style.visibility = "visible"; 
+    infoBtn.style.backgroundColor= '#9BC49B';
     infoClickActive= false;
 }
 
 
 function infoClickBtnClick(){
     infoClickActive= true;
-    document.getElementById("drawing-shapes__btn").innerText= "Chose Shape";
-    document.getElementById("info-btn").style.backgroundColor= "green";
+    drawingShapesBtn.innerText= "Chose Shape";
+    infoBtn.style.backgroundColor= "green";
 
     newShape={
         startX: null,
@@ -124,8 +121,6 @@ function submitCilck(){
     console.log("Submit clicked");
     submitAnimation.startAnimation();
 }
-
-//-------------------------------------------------------------------------------------------------------------------
 
 function getCanvasCoordinates(event){
     let x= event.clientX - canvas.getBoundingClientRect().left;
@@ -165,7 +160,7 @@ function drag(event){
     if(dragObj)
         dragObj.updateCord(newShape);
 
-    if(!collisionAllowed){
+    if(!colisionBtn.isColisionAllowed()){
         if(CollisionCheck.doesObjsCollide(dragObj,hotSpotObjects)){
             if(dragObj)
                 dragObj.setColor("colision");
@@ -174,21 +169,19 @@ function drag(event){
                 dragObj.setColor("default");
         }
     }else{
-        dragObj.setColor("default");
+        if(dragObj)
+            dragObj.setColor("default");
     }
 }
 
 function dragStop(event){
-
-    let coordinates= getCanvasCoordinates(event);
     showDragObj= false;
-
     if(dragObj instanceof Rect){
-        if(!dragObj.inColision() || collisionAllowed)
+        if(!dragObj.inColision() || colisionBtn.isColisionAllowed())
             hotSpotObjects.push(new Rect(newShape));
     }
     if(dragObj instanceof Circle){
-        if(!dragObj.inColision() || collisionAllowed)
+        if(!dragObj.inColision() || colisionBtn.isColisionAllowed())
             hotSpotObjects.push(new Circle(newShape));
     }
 }
@@ -196,19 +189,15 @@ function dragStop(event){
 function finishSession(){
     canvas.style.width= "0px";
     canvas.style.borderWidth= "0px 0 0px 0px";
-    inpFile.style.visibility= "visible";
-    document.getElementById("input-container").setAttribute("style","width:700px");
-    document.getElementById("input-container").style.borderWidth= "3px 0 3px 3px";
+    inputBtn.style.visibility= "visible";
+    inputContainer.setAttribute("style","width:700px");
+    inputContainer.style.borderWidth= "3px 0 3px 3px";
     hotSpotObjects= [];
 }
 
-//-------------------------------------------------------------------------------------------------------------------
-
 function draw(ctx){
     ctx.clearRect(IMG_POS_X,IMG_POS_Y, IMG_WIDTH, IMG_HEIGHT); 
-    ctx.fillStyle= "black";
-    ctx.fillRect(IMG_POS_X, IMG_POS_Y, IMG_WIDTH, IMG_HEIGHT);
-    ctx.drawImage(image,0,0,700,600);
+    ctx.drawImage(image,IMG_POS_X,IMG_POS_Y,IMG_WIDTH,IMG_HEIGHT);
     for(let i= 0; i < hotSpotObjects.length; i++){
         hotSpotObjects[i].draw(ctx);
     }
@@ -228,11 +217,10 @@ function draw(ctx){
 }
 
 let lastTime= 0;
-function gameLoop(timeStamp){
+function appLoop(timeStamp){
     lastTime= timeStamp;
     draw(ctx);
     clickAnimation.updateTimer();
-    requestAnimationFrame(gameLoop);
+    requestAnimationFrame(appLoop);
 }
-
-requestAnimationFrame(gameLoop);
+requestAnimationFrame(appLoop);

@@ -1,15 +1,7 @@
 import Circle from './Circle.js';
 import Rect from './Rect.js';
 
-
-//Prebaci ovde i za kvadrat kvadrat !!!!
 export default class CollisionCheck{
-
-    // leftUp: null,
-    // leftDown: null,
-    // rightUp: null,
-    // rightDown: null
-
     //0 za Y kordinatu je vrhs stranice ne dno
 
     static doesObjsCollide(dragObj,hotSpotObjects){
