@@ -4,6 +4,7 @@ import CollisionCheck from './CollisionCheck.js';
 import ClickInfo from './ClickInfo.js';
 import ClickAnimation from './ClickAnimation.js';
 import SubmitAnimation from './SubmitAnimation.js';
+import Shape from './Shape.js';
 
 const IMG_WIDTH = 700;
 const IMG_HEIGHT = 600;
@@ -85,10 +86,7 @@ function colisionBtnClick(){
 let image= new Image();
 
 function uploadPic(){
-    // document.getElementById("picUploadBtn").style.visibility = "hidden"; 
-    // document.getElementById("uploadPicBackground").setAttribute("style","width:0px");
-    // document.getElementById("uploadPicBackground").style.margin= "0px 0px 0px 0px";
-    // canvas.style.width= "700px";
+
     const file= this.files[0];
     const reader= new FileReader();
     reader.addEventListener("load",function(){

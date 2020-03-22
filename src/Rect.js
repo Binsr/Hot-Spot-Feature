@@ -1,15 +1,11 @@
 import Circle from './Circle.js';
+import Shape from './Shape.js';
 
-export default class Rect{
+export default class Rect extends Shape{
 
     constructor(positions){
 
-        this.colorInColision= "red";
-        this.defaultColor= "green";
-        this.colision= null;
-
-        this.color= this.defaultColor;
-
+        super();
         this.startPos={
             x: positions.startX,
             y: positions.startY
@@ -18,21 +14,6 @@ export default class Rect{
         this.endPos={
             x: positions.endX,
             y: positions.endY
-        }
-    }
-
-    inColision(){
-        return this.colision;
-    }
-
-    setColor(status){
-        if(status == "colision"){
-            this.color= this.colorInColision;
-            this.colision= true;
-        }
-        else{
-            this.color= this.defaultColor;
-            this.colision= false;
         }
     }
 
@@ -143,7 +124,7 @@ export default class Rect{
 
     draw(ctx){
         ctx.strokeStyle= this.color;
-        ctx.lineWidth= 4;
+        ctx.lineWidth= this.lineWidth;
         ctx.strokeRect(this.startPos.x,this.startPos.y,this.endPos.x-this.startPos.x,this.endPos.y-this.startPos.y);
     }
 }
