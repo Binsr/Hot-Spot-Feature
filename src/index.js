@@ -49,7 +49,6 @@ let infoClickActive= false;
 
 function rectBtnClick(){ 
         infoClickActive= false;
-        console.log("Rect clicked");
         document.getElementById("drawing-shapes__list").style.visibility= "hidden";
         document.getElementById("drawing-shapes__btn").innerText= "Rect";
         dragObj= dragRect;
@@ -57,20 +56,17 @@ function rectBtnClick(){
 
 function circleBtnClick(){ 
         infoClickActive= false;
-        console.log("Circle clicked");
         document.getElementById("drawing-shapes__list").style.visibility= "hidden";
         document.getElementById("drawing-shapes__btn").innerText= "Circle";
         dragObj= dragCircle;
 }
 
 function undoBtnClick(){ 
-    console.log("undo clicked");
     hotSpotObjects.pop();
 }
 
 
 function colisionBtnClick(){ 
-    console.log("Colision btn clicked");
     if(!collisionAllowed){
         document.getElementById("colision-container__on-of-btn").style.backgroundColor= "green";
         document.getElementById("colision-container__on-of-btn").innerText= "On";
@@ -89,7 +85,6 @@ function colisionBtnClick(){
 let image= new Image();
 
 function uploadPic(){
-    console.log("Upload Pic");
     // document.getElementById("picUploadBtn").style.visibility = "hidden"; 
     // document.getElementById("uploadPicBackground").setAttribute("style","width:0px");
     // document.getElementById("uploadPicBackground").style.margin= "0px 0px 0px 0px";
@@ -99,7 +94,6 @@ function uploadPic(){
     reader.addEventListener("load",function(){
         // previewImage.setAttribute("src",this.result);
         image.src= this.result;
-        console.log(file);
         canvas.style.width= "700px";
         document.getElementById("input-container").setAttribute("style","width:0px");
         canvas.style.borderWidth= "3px 0 3px 3px";

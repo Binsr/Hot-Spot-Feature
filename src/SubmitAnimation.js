@@ -65,7 +65,6 @@ export default class SubmitAnimation{
             }
         }else{
             this.updateMovingPoint();
-            console.log("this.timer1")
         }
     }
 
