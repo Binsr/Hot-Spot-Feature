@@ -26,8 +26,9 @@ export default class ClickInfo{
                 let y= clickCoordinates.y;
 
                 if(x > rectAngleCord.leftUp.x && x < rectAngleCord.rightUp.x)
-                    if(y > rectAngleCord.leftUp.y && y < rectAngleCord.leftDown.y)
+                    if(y > rectAngleCord.leftUp.y && y < rectAngleCord.leftDown.y){
                         return objects[i];
+                    }
             }
         }
 

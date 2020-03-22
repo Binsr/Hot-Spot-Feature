@@ -1,7 +1,8 @@
 export default class Shape{
 
-    constructor(){
+    constructor(id){
 
+        this.id= id;
         this.colorInColision= "red";
         this.defaultColor= "green";
         this.colision= null;

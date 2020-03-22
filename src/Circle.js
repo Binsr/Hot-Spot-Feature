@@ -2,9 +2,9 @@ import Shape from "./Shape.js";
 
 export default class Circle extends Shape{
 
-    constructor(positions){
+    constructor(positions,id){
 
-        super();
+        super(id);
         this.centerX= (positions.startX + positions.endX)/2;
         this.centerY= (positions.startY + positions.endY)/2;
         this.r= (Math.sqrt(Math.pow(positions.startX-positions.endX,2) + Math.pow(positions.startY - positions.endY,2)))/2;

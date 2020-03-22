@@ -3,9 +3,9 @@ import Shape from './Shape.js';
 
 export default class Rect extends Shape{
 
-    constructor(positions){
+    constructor(positions,id){
 
-        super();
+        super(id);
         this.startPos={
             x: positions.startX,
             y: positions.startY

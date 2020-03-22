@@ -117,13 +117,13 @@ function infoClickBtnClick(){
 }
 function submitCilck(){
     console.log("Submit clicked");
+    console.log(hotSpotObjects);
     submitAnimation.startAnimation();
 }
 
 function getCanvasCoordinates(event){
     let x= event.clientX - canvas.getBoundingClientRect().left;
     let y= event.clientY - canvas.getBoundingClientRect().top;
-
     return {x: x, y: y};
 }
 
@@ -174,13 +174,15 @@ function drag(event){
 
 function dragStop(event){
     showDragObj= false;
+    if(infoClickActive)
+        return;
     if(dragObj instanceof Rect){
         if(!dragObj.inColision() || colisionBtn.isColisionAllowed())
-            hotSpotObjects.push(new Rect(newShape));
+            hotSpotObjects.push(new Rect(newShape,hotSpotObjects.length));
     }
     if(dragObj instanceof Circle){
         if(!dragObj.inColision() || colisionBtn.isColisionAllowed())
-            hotSpotObjects.push(new Circle(newShape));
+            hotSpotObjects.push(new Circle(newShape,hotSpotObjects.length));
     }
 }
 
