@@ -81,9 +81,7 @@ function undoBtnClick(){
 
 let image= new Image();
 
-//POTENCIJALNO NOVA KOMPONENTA
 function uploadPic(){
-
     const file= this.files[0];
     const reader= new FileReader();
     reader.addEventListener("load",function(){
