@@ -5,6 +5,7 @@ export default class ClickInfo{
 
 
     static getClickedObj(clickCoordinates,objects){
+        let clickedObjs=[];
 
         for(let i= 0; i < objects.length; i++){
             if(objects[i] instanceof Circle){
@@ -17,7 +18,7 @@ export default class ClickInfo{
                 let dist= Math.sqrt(Math.pow(x1-x2,2) + Math.pow(y1-y2,2));
 
                 if(dist < ce.r)
-                    return objects[i];
+                    clickedObjs.push(objects[i]);
             }
 
             if(objects[i] instanceof Rect){
@@ -27,11 +28,11 @@ export default class ClickInfo{
 
                 if(x > rectAngleCord.leftUp.x && x < rectAngleCord.rightUp.x)
                     if(y > rectAngleCord.leftUp.y && y < rectAngleCord.leftDown.y){
-                        return objects[i];
+                        clickedObjs.push(objects[i]);
                     }
             }
         }
 
-        return null;
+        return clickedObjs;
     }
 }
